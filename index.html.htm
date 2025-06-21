@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Página</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8f9fa;
+        }
+        .background-img {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2;
+            background: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.25;
+        }
+        .bubbles-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .bubble {
+            position: absolute;
+            width: 48px; height: 48px;
+            opacity: 0.7;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s, filter 0.3s;
+            user-select: none;
+        }
+        .bubble img {
+            width: 60%; height: 60%;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #fff;
+            padding: 4%;
+        }
+        .bubble:hover {
+            transform: scale(1.13) rotate(-8deg);
+            box-shadow: 0 6px 18px 0 rgba(0,198,255,0.18);
+            background: #e3f2fd;
+            filter: brightness(1.1);
+            opacity: 1;
+            z-index: 2;
+        }
+        .nome-canto {
+            position: fixed;
+            bottom: 18px;
+            right: 24px;
+            background: #fff;
+            color: #111;
+            padding: 10px 22px;
+            border-radius: 16px 0 16px 16px;
+            font-size: 1.05rem;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            z-index: 10;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        .destaque-central {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.92);
+            color: #232526;
+            padding: 38px 32px 28px 32px;
+            border-radius: 22px;
+            box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+            text-align: center;
+            z-index: 20;
+            max-width: 90vw;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .destaque-central h1 {
+            margin: 0 0 18px 0;
+            font-size: 2.1rem;
+            color: #000;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+            text-shadow: 0 2px 12px #00c6ff22;
+        }
+        .destaque-central p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin: 0;
+            display: block;
+            text-align: center;
+        }
+        footer {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            text-align: center;
+            margin-top: 32px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            z-index: 5;
+            position: relative;
+        }
+        .botao-contato {
+            display: inline-block;
+            margin: 0 8px 0 0;
+            padding: 10px 28px;
+            border-radius: 24px;
+            font-weight: bold;
+            font-size: 1rem;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #111 0%, #555 100%);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            transition: background 0.3s, color 0.2s, transform 0.2s;
+            border: none;
+            outline: none;
+            position: relative;
+        }
+        .botao-contato:hover {
+            background: linear-gradient(90deg, #555 0%, #111 100%);
+            color: #fff;
+            transform: translateY(-2px) scale(1.05);
+            text-decoration: none;
+        }
+        @media (max-width: 900px) {
+            .destaque-central {
+                max-width: 98vw;
+                min-width: unset;
+                padding: 18px 4vw;
+            }
+            .destaque-central h1 {
+                font-size: 1.3rem;
+            }
+            .destaque-central p {
+                font-size: 1rem;
+            }
+            .bubble {
+                width: 40px;
+                height: 40px;
+            }
+            .bubble img {
+                width: 24px;
+                height: 24px;
+                padding: 3px;
+            }
+        }
+        @media (max-width: 600px) {
+            .destaque-central {
+                padding: 12px 2vw;
+                min-width: unset;
+            }
+            .destaque-central h1 {
+                font-size: 1.1rem;
+            }
+            .destaque-central p {
+                font-size: 0.95rem;
+            }
+            .nome-canto {
+                font-size: 0.85rem;
+                padding: 7px 10px;
+                right: 8px;
+                bottom: 8px;
+            }
+            .bubble {
+                width: 28px;
+                height: 28px;
+            }
+            .bubble img {
+                width: 16px;
+                height: 16px;
+                padding: 2px;
+            }
+            footer {
+                flex-direction: column;
+                gap: 8px;
+                margin-top: 16px;
+            }
+            .botao-contato {
+                width: 90vw;
+                max-width: 320px;
+                margin: 0 auto;
+                padding: 10px 0;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-img"></div>
+    <div class="bubbles-bg">
+        <div class="bubble" style="left:5%; top:8%;"><img src="https://img.icons8.com/color/48/000000/html-5--v1.png" alt="HTML"></div>
+        <div class="bubble" style="left:12%; top:18%;"><img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS"></div>
+        <div class="bubble" style="left:20%; top:5%;"><img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JS"></div>
+        <div class="bubble" style="left:28%; top:15%;"><img src="https://img.icons8.com/color/48/000000/python--v1.png" alt="Python"></div>
+        <div class="bubble" style="left:35%; top:10%;"><img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png" alt="Java"></div>
+        <div class="bubble" style="left:42%; top:20%;"><img src="https://img.icons8.com/color/48/000000/html-5--v1.png" alt="HTML"></div>
+        <div class="bubble" style="left:50%; top:8%;"><img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS"></div>
+        <div class="bubble" style="left:58%; top:18%;"><img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JS"></div>
+        <div class="bubble" style="left:65%; top:5%;"><img src="https://img.icons8.com/color/48/000000/python--v1.png" alt="Python"></div>
+        <div class="bubble" style="left:72%; top:15%;"><img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png" alt="Java"></div>
+        <div class="bubble" style="left:80%; top:10%;"><img src="https://img.icons8.com/color/48/000000/html-5--v1.png" alt="HTML"></div>
+        <div class="bubble" style="left:88%; top:20%;"><img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS"></div>
+        <div class="bubble" style="left:95%; top:8%;"><img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JS"></div>
+    </div>
+    <div class="nome-canto">Wallisson Elizeu Candido Da Silva</div>
+    <div class="destaque-central">
+        <h1>Wallisson Elizeu Candido Da Silva</h1>
+        <p>
+            Eu sou um programador iniciante, estou aprendendo a programar em python, javascript, html e css.<br>
+            Eu gosto de programar e estou sempre buscando melhorar minhas habilidades.<br>
+            Eu também gosto de aprender sobre novas tecnologias e tendências na área de programação.
+        </p>
+    </div>
+    <footer>
+        <a href="https://instagram.com/wzinn_v7" target="_blank" class="botao-contato">
+            Instagram
+        </a>
+        <a href="https:nelizeu070@gmail.com" class="botao-contato">
+            E-mail
+        </a>
+        <a href="https://wa.me/55991724618" target="_blank" class="botao-contato">
+            WhatsApp
+        </a>
+    </footer>
+    <script>
+        // Efeito bolha no touch
+        document.querySelectorAll('.bubble').forEach(bubble => {
+            bubble.addEventListener('touchstart', function() {
+                this.classList.add('touch-ativo');
+            });
+            bubble.addEventListener('touchend', function() {
+                this.classList.remove('touch-ativo');
+            });
+            bubble.addEventListener('touchcancel', function() {
+                this.classList.remove('touch-ativo');
+            });
+        });
+    </script>
+</body>
+</html>
